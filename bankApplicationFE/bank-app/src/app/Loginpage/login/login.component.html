@@ -1,0 +1,230 @@
+<div class="page-wrapper">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f6f6f6;
+    }
+
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-card {
+      width: 100%;
+      max-width: 1000px;
+      background: #fff;
+      display: flex;
+      border-radius: 6px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    .left, .right {
+      flex: 1;
+      padding: 60px 50px;
+    }
+
+    .left h3 {
+      font-size: 22px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .left small {
+      color: #999;
+      display: block;
+      margin-bottom: 30px;
+    }
+
+    .right {
+      background: #f2f2f2;
+      text-align: center;
+    }
+
+    .right h3 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .right p {
+      color: #777;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ddd;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .input:focus {
+      outline: none;
+      border-color: #4c8bf5;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      background: #5a9ea8;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn-register {
+      padding: 12px 26px;
+      border: 2px solid #5a9ea8;
+      background: transparent;
+      color: #5a9ea8;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .link {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #777;
+      cursor: pointer;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    .otp-input {
+      text-align: center;
+      font-size: 20px;
+      letter-spacing: 10px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .main-card {
+        flex-direction: column;
+      }
+    }
+
+.main-card.single {
+  justify-content: center;
+  max-width: 520px;   
+}
+
+.main-card.single .right {
+  display: none;
+}
+
+.main-card.single .left {
+  width: 100%;
+  padding: 50px 45px;  
+}
+
+.main-card.single .left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.btn-login {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px;
+  background: #5a9ea8;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.main-card.single .left h3,
+.main-card.single .left .link {
+  text-align: center;
+}
+
+
+  </style>
+
+  <div class="main-card" *ngIf="!isRegisterView && !isOtpView">
+
+    <div class="left">
+      <h3>WELCOME BACK</h3>
+      <small>LOG IN TO YOUR ACCOUNT BELOW</small>
+
+      <form [formGroup]="userForm" *ngIf="isLoginView">
+        <input class="input" type="email" placeholder="Email" formControlName="email">
+        <input class="input" type="password" placeholder="Password" formControlName="password">
+        <button class="btn-login" type="button" (click)="loginUser()">LOG IN</button>
+      </form>
+
+      <span class="link">Forgotten password?</span>
+    </div>
+
+    <div class="right">
+      <h3>NEW CUSTOMER</h3>
+      <p>
+        Create a Profile
+      </p>
+      <button class="btn-register" (click)="showRegister()">CREATE AN ACCOUNT</button>
+    </div>
+
+  </div>
+
+  <div class="main-card single" *ngIf="isRegisterView">
+    <div class="left">
+      <h3>CREATE ACCOUNT</h3>
+
+      <form [formGroup]="userForm">
+        <input class="input" type="text" placeholder="Name" formControlName="name">
+        <input class="input" type="email" placeholder="Email" formControlName="email">
+        <input class="input" type="password" placeholder="Password" formControlName="password">
+        <input class="input" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+        <input class="input" type="text" placeholder="Bank Name" formControlName="bankName">
+        <button class="btn-login" type="button" (click)="saveUser()">CREATE ACCOUNT</button>
+      </form>
+
+      <span class="link" (click)="showLogin()">← Back to Login</span>
+    </div>
+
+    <div class="right"></div>
+  </div>
+
+  <div class="main-card single" *ngIf="isOtpView">
+    <div class="left">
+      <h3>OTP VERIFICATION</h3>
+
+      <form [formGroup]="otpForm">
+        <input class="input otp-input"
+               type="text"
+               placeholder="Enter OTP"
+               formControlName="otp">
+        <button class="btn-login" type="button" (click)="verifyOtp()">VERIFY OTP</button>
+      </form>
+    </div>
+
+    <div class="right"></div>
+  </div>
+
+</div>

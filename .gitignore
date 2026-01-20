@@ -1,0 +1,22 @@
+# ===== STS / Eclipse =====
+.metadata/
+.project
+.classpath
+.settings/
+
+# ===== Maven =====
+target/
+bin/
+
+# ===== Logs & DB =====
+*.log
+*.db
+*.trace.db
+
+# ===== Node / Angular =====
+node_modules/
+dist/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db

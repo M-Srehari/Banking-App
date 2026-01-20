@@ -1,0 +1,242 @@
+<div class="dashboard-wrapper">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h4 class="logo">My Account</h4>
+
+    <ul>
+      <li [class.active]="showBankDetails" (click)="selectTab('bank')">Bank Details</li>
+      <li [class.active]="showAddMoney" (click)="selectTab('add')">Credit</li>
+      <li [class.active]="showSendMoney" (click)="selectTab('send')">Debit</li>
+      <li [class.active]="showDownloadPdf" (click)="selectTab('pdf')">
+        Download Transaction History
+      </li>
+      <li class="logout-item" (click)="logout()">Logout</li>
+    </ul>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <!-- BANK DETAILS -->
+    <div *ngIf="showBankDetails" class="details-card">
+      <h3 class="card-title">Bank Details</h3>
+
+      <div class="detail-row">
+        <label>Name</label><span>{{ user?.name }}</span>
+      </div>
+      <div class="detail-row">
+        <label>Email</label><span>{{ user?.email }}</span>
+      </div>
+      <div class="detail-row">
+        <label>Account Number</label><span>{{ user?.accountNumber }}</span>
+      </div>
+      <div class="detail-row">
+        <label>Bank</label><span>{{ user?.bankName }}</span>
+      </div>
+      <div class="detail-row">
+        <label>Total Balance</label>
+        <span class="balance">₹ {{ user?.balance }}</span>
+      </div>
+    </div>
+
+    <!-- ADD MONEY -->
+    <div *ngIf="showAddMoney" class="details-card">
+      <h3 class="card-title">Add Money</h3>
+
+      <div class="form-center">
+        <input type="number" class="input" placeholder="Enter Amount" [(ngModel)]="addAmount" />
+
+        <input
+          *ngIf="addAmount && addAmount > 0"
+          type="password"
+          class="input"
+          placeholder="Enter Login Password"
+          [(ngModel)]="addPassword"
+        />
+
+        <button class="btn btn-primary form-btn" (click)="addMoney()">Submit</button>
+      </div>
+    </div>
+
+    <!-- SEND MONEY -->
+    <div *ngIf="showSendMoney" class="details-card">
+      <h3 class="card-title">Send Money</h3>
+
+      <div class="form-center">
+        <input
+          type="text"
+          class="input"
+          placeholder="Recipient Account Number"
+          [(ngModel)]="sendAccount"
+        />
+        <input type="number" class="input" placeholder="Amount" [(ngModel)]="sendAmount" />
+
+        <input
+          *ngIf="sendAmount && sendAmount > 0"
+          type="password"
+          class="input"
+          placeholder="Enter Login Password"
+          [(ngModel)]="password"
+        />
+
+        <button class="btn btn-success form-btn" (click)="sendMoney()">Send Money</button>
+      </div>
+    </div>
+
+    <!-- DOWNLOAD PDF -->
+    <div *ngIf="showDownloadPdf" class="details-card">
+      <h3 class="card-title">Download Transactions PDF</h3>
+
+      <div class="form-center">
+        <input type="date" class="input" [(ngModel)]="fromDate" />
+        <input type="date" class="input" [(ngModel)]="toDate" />
+
+        <button class="btn btn-primary form-btn" (click)="downloadPDF()">Download PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+
+    /* Professional soft banking background */
+    background: linear-gradient(135deg, #f7f8fa 0%, #eef1f5 40%, #f9fafb 100%);
+
+    min-height: 100vh;
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Subtle inner glow */
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6), transparent 70%);
+  }
+
+  /* Layout */
+  .dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    width: 240px;
+    background: #efefef;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 16px 16px 0;
+  }
+
+  .logo {
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    flex: 1;
+  }
+
+  .sidebar li {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: #ddd;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .sidebar li.active {
+    background: #000;
+    color: #fff;
+  }
+
+  .logout-item {
+    background: #dc3545 !important;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  /* Content Centering */
+  .content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Card */
+  .details-card {
+    width: 420px;
+    background: #fff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Titles */
+  .card-title {
+    text-align: center;
+    margin-bottom: 28px;
+    font-weight: 600;
+  }
+
+  /* Form Alignment */
+  .form-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  /* Inputs */
+  .input {
+    width: 320px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 10px 24px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 8px;
+  }
+
+  .form-btn {
+    width: 160px;
+  }
+
+  .btn-primary {
+    background: #cfa77a;
+    color: #fff;
+  }
+
+  .btn-success {
+    background: #28a745;
+    color: #fff;
+  }
+
+  /* Bank Details */
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .balance {
+    color: #28a745;
+    font-weight: 700;
+  }
+</style>
