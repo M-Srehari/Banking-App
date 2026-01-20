@@ -1,22 +1,81 @@
-# ===== STS / Eclipse =====
-.metadata/
-.project
-.classpath
-.settings/
+# ======================
+# Spring Boot / Java
+# ======================
 
-# ===== Maven =====
-target/
-bin/
+# Compiled class files
+*.class
 
-# ===== Logs & DB =====
+# Log files
 *.log
-*.db
-*.trace.db
 
-# ===== Node / Angular =====
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Maven / Gradle
+target/
+build/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse
+*.pydevproject
+.project
+.metadata/
+*.tmp
+*.bak
+*.swp
+*.class
+.settings/
+.loadpath
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+out/
+
+# VS Code
+.vscode/
+
+# ======================
+# Angular / Node
+# ======================
+
+# Node modules
 node_modules/
-dist/
 
-# ===== OS =====
+# Angular build
+dist/
+out-tsc/
+coverage/
+
+# Environment files
+src/environments/*.ts
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ======================
+# Misc / OS files
+# ======================
 .DS_Store
 Thumbs.db
+*.bak
+*.swp
+*.swo
+*.tmp
+
+# ======================
+# Database files
+# ======================
+*.mv.db
+*.trace.db
