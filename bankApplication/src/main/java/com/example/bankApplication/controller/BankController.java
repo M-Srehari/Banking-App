@@ -261,4 +261,9 @@ public class BankController {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @PostMapping("/resendOtp")
+    public ResponseEntity<Object> resendOtp(@RequestBody BankDTO dto) {
+        return ResponseEntity.ok(bankService.resendOtp(dto.getEmail()));
+    }
 }

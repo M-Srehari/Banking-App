@@ -23,6 +23,7 @@ export class LoginComponent {
   isRegisterView = true;
   isLoginView = false;
   isOtpView = false;
+  resendDisabled = false;
   emailForOtp = '';
 
   constructor(
@@ -90,13 +91,13 @@ export class LoginComponent {
 
     this.loginService.login(dto).subscribe({
       next: res => {
-        if (res === 'Login successful') {
-          this.isLoginView = false;
-          this.isOtpView = true;
-          this.emailForOtp = dto.email; 
-        } else {
-          alert(res);
-        }
+        if (res.includes('OTP sent')) {
+  this.isLoginView = false;
+  this.isOtpView = true;
+  this.emailForOtp = dto.email;
+} else {
+  alert(res);
+}
       },
       error: () => alert('Login failed')
     });
@@ -126,6 +127,18 @@ export class LoginComponent {
       }
     },
     error: () => alert('OTP verification failed')
+  });
+}
+
+resendOtp() {
+  this.loginService.resendOtp(this.emailForOtp).subscribe({
+    next: (res: any) => {
+      alert(res);
+      if (res.includes('successfully')) {
+        this.resendDisabled = true;
+      }
+    },
+    error: () => alert('Failed to resend OTP')
   });
 }
 }

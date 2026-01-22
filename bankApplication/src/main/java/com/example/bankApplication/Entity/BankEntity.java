@@ -33,6 +33,8 @@ public class BankEntity {
     private String bankName;
 
     private String branchCode;
+    
+    private Integer otpResendCount = 0;
 
     @Column(nullable = false)
     private Double balance = 0.0;
@@ -93,6 +95,14 @@ public class BankEntity {
 
     public LocalDateTime getOtpExpiry() {
         return otpExpiry;
+    }
+    
+    public Integer getOtpResendCount() {
+        return otpResendCount;
+    }
+
+    public void setOtpResendCount(Integer otpResendCount) {
+        this.otpResendCount = otpResendCount;
     }
 
     public void setOtpExpiry(LocalDateTime otpExpiry) {

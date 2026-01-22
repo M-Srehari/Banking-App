@@ -79,3 +79,13 @@ Thumbs.db
 # ======================
 *.mv.db
 *.trace.db
+
+# Spring Boot
+bin/
+target/
+
+# Eclipse / STS
+.metadata/
+.classpath
+.project
+.settings/

@@ -1,10 +1,21 @@
 <div class="page-wrapper">
-
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f6f6f6;
+    }
+
+    * {
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        'Helvetica Neue',
+        Arial,
+        sans-serif;
     }
 
     .page-wrapper {
@@ -20,11 +31,12 @@
       background: #fff;
       display: flex;
       border-radius: 6px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
       overflow: hidden;
     }
 
-    .left, .right {
+    .left,
+    .right {
       flex: 1;
       padding: 60px 50px;
     }
@@ -73,6 +85,37 @@
       border-color: #4c8bf5;
     }
 
+    .btn-otp {
+      width: 100%;
+      max-width: 420px;
+      height: 46px;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .btn-verify {
+      background: #5a9ea8;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-resend {
+      background: transparent;
+      border: 2px solid #5a9ea8;
+      color: #5a9ea8;
+    }
+
+    .btn-resend:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .btn-login {
       width: 100%;
       padding: 12px;
@@ -118,64 +161,61 @@
       }
     }
 
-.main-card.single {
-  justify-content: center;
-  max-width: 520px;   
-}
+    .main-card.single {
+      justify-content: center;
+      max-width: 520px;
+    }
 
-.main-card.single .right {
-  display: none;
-}
+    .main-card.single .right {
+      display: none;
+    }
 
-.main-card.single .left {
-  width: 100%;
-  padding: 50px 45px;  
-}
+    .main-card.single .left {
+      width: 100%;
+      padding: 50px 45px;
+    }
 
-.main-card.single .left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+    .main-card.single .left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-.input {
-  width: 100%;
-  max-width: 420px;
-  padding: 12px 14px;
-  border: 1px solid #ddd;
-  margin-bottom: 18px;
-  font-size: 14px;
-}
+    .input {
+      width: 100%;
+      max-width: 420px;
+      padding: 12px 14px;
+      border: 1px solid #ddd;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
 
-.btn-login {
-  width: 100%;
-  max-width: 420px;
-  padding: 12px;
-  background: #5a9ea8;
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 10px;
-}
+    .btn-login {
+      width: 100%;
+      max-width: 420px;
+      padding: 12px;
+      background: #5a9ea8;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
 
-.main-card.single .left h3,
-.main-card.single .left .link {
-  text-align: center;
-}
-
-
+    .main-card.single .left h3,
+    .main-card.single .left .link {
+      text-align: center;
+    }
   </style>
 
   <div class="main-card" *ngIf="!isRegisterView && !isOtpView">
-
     <div class="left">
       <h3>WELCOME BACK</h3>
       <small>LOG IN TO YOUR ACCOUNT BELOW</small>
 
       <form [formGroup]="userForm" *ngIf="isLoginView">
-        <input class="input" type="email" placeholder="Email" formControlName="email">
-        <input class="input" type="password" placeholder="Password" formControlName="password">
+        <input class="input" type="email" placeholder="Email" formControlName="email" />
+        <input class="input" type="password" placeholder="Password" formControlName="password" />
         <button class="btn-login" type="button" (click)="loginUser()">LOG IN</button>
       </form>
 
@@ -184,12 +224,9 @@
 
     <div class="right">
       <h3>NEW CUSTOMER</h3>
-      <p>
-        Create a Profile
-      </p>
+      <p>Create a Profile</p>
       <button class="btn-register" (click)="showRegister()">CREATE AN ACCOUNT</button>
     </div>
-
   </div>
 
   <div class="main-card single" *ngIf="isRegisterView">
@@ -197,11 +234,16 @@
       <h3>CREATE ACCOUNT</h3>
 
       <form [formGroup]="userForm">
-        <input class="input" type="text" placeholder="Name" formControlName="name">
-        <input class="input" type="email" placeholder="Email" formControlName="email">
-        <input class="input" type="password" placeholder="Password" formControlName="password">
-        <input class="input" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
-        <input class="input" type="text" placeholder="Bank Name" formControlName="bankName">
+        <input class="input" type="text" placeholder="Name" formControlName="name" />
+        <input class="input" type="email" placeholder="Email" formControlName="email" />
+        <input class="input" type="password" placeholder="Password" formControlName="password" />
+        <input
+          class="input"
+          type="password"
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+        />
+        <input class="input" type="text" placeholder="Bank Name" formControlName="bankName" />
         <button class="btn-login" type="button" (click)="saveUser()">CREATE ACCOUNT</button>
       </form>
 
@@ -216,15 +258,24 @@
       <h3>OTP VERIFICATION</h3>
 
       <form [formGroup]="otpForm">
-        <input class="input otp-input"
-               type="text"
-               placeholder="Enter OTP"
-               formControlName="otp">
+        <input
+          class="input otp-input"
+          type="text"
+          placeholder="Enter Your OTP"
+          formControlName="otp"
+        />
         <button class="btn-login" type="button" (click)="verifyOtp()">VERIFY OTP</button>
       </form>
+
+      <button
+        class="btn-login"
+        type="button"
+        (click)="resendOtp()"
+        [disabled]="resendDisabled"
+        style="margin-top: 15px"
+      >
+        Resend OTP
+      </button>
     </div>
-
-    <div class="right"></div>
   </div>
-
 </div>

@@ -26,4 +26,6 @@ public interface BankService {
 
 	String logins(BankDTO dto);
 
+	Object resendOtp(String email);
+
 }

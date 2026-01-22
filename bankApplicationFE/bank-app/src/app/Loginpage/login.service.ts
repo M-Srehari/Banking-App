@@ -29,6 +29,16 @@ export class LoginService {
     return this.http.post(`${this.baseUrl}/login`, dto, { headers, responseType: 'text' });
   }
 
+  resendOtp(email: string): Observable<string> {
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.http.post(
+    `${this.baseUrl}/resendOtp`,
+    { email },
+    { headers, responseType: 'text' }
+  );
+}
+
   verifyOtp(dto: { email: string; otp: string }): Observable<string> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`${this.baseUrl}/validate-otp`, dto, { headers, responseType: 'text' });
